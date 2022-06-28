@@ -22,7 +22,6 @@ class LoginView(View):
             if user:
                 login(request, user)
                 redirect_url = request.GET.get('next', '/')
-                # pobierze co jest w url po 'next' i tam bedzie przekierowywać, jeżeli tego nie ma to przekierowuje na '/'
                 return redirect(redirect_url)
             else:
                 return render(request, 'form.html', {'form': form})

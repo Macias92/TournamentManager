@@ -16,11 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from accounts.views import LoginView, LogoutView, CreateUserView
+from manager.views import IndexView, TournamentTypeAddView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('ttype_add/', TournamentTypeAddView.as_view(), name='ttype_add'),
+
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('create_user/', CreateUserView.as_view(), name='create_user')
+    path('create_user/', CreateUserView.as_view(), name='create_user'),
+
+    path('', IndexView.as_view(), name='index'),
+
 
 ]
