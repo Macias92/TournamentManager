@@ -8,4 +8,7 @@ class TournamentForm(forms.ModelForm):
         model = Tournament
         fields = '__all__'
         widgets = {
-            'players': forms.CheckboxSelectMultiple}
+            'players': forms.CheckboxSelectMultiple,
+            'date': forms.DateInput(attrs={'type': 'date'}),
+            'time': forms.TimeInput(attrs={'type': 'time'})
+        }

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 from manager.forms import TournamentForm
@@ -32,5 +32,34 @@ class TournamentAddView(View):
         return render(request, 'form.html', {'form': form})
 
     def post(self, request):
-        pass
+        form = TournamentForm(request.POST)
+        if form.is_valid():
+            num_players = form.cleaned_data.get('num_players')
+            selected = form.cleaned_data.get('players')
+            if len(selected) > num_players:
+                return render(request, 'form.html', {'form': form,
+                                                     'error': 'You have selected more players than you declared!'})
+            if len(selected) < num_players:
+                return render(request, 'form.html', {'form': form,
+                                                     'error': 'You have selected less players than you declared!'})
+            if len(selected) == 1:
+                return render(request, 'form.html', {'form': form,
+                                                     'error': 'It cannot be one player in Tournament!'})
+            # TODO  think about getting less than declared players exception, could be less?
+            #  add exception about the player has in declared date another tournament and is not available to choose
+            tournament = form.save()
+        return render(request, "form.html", {"form": form})
+
+
+class TournamentEditView(UpdateView):
+    model = Tournament
+    template_name = 'form.html'
+    success_url = reverse_lazy('index')
+
+
+class TournamentDeleteView(DeleteView):
+    model = Tournament
+    template_name = 'form.html'
+    success_url = reverse_lazy('index')
+
 

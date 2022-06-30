@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-    <main class="px-3">
+<main class="px-3">
     <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
+        {% csrf_token %}
+        {{ form.as_p }}
 
-    <input class="btn btn-secondary" type="submit" value="Send">
+        <input class="btn btn-secondary" type="submit" value="Send">
     </form>
-        {% for error in errors %}
-                <strong>{{ error }}</strong>
-            {% endfor %}
-    </main>
+</main>
+<br>
+{% if error %}
+<strong>{{ error }}</strong>
+{% endif %}
 {% endblock %}

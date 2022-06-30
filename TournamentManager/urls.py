@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from accounts.views import LoginView, LogoutView, CreateUserView
-from manager.views import IndexView, TournamentTypeAddView, PlayerAddView, TournamentAddView
+from manager.views import IndexView, TournamentTypeAddView, PlayerAddView, TournamentAddView, TournamentDeleteView, \
+    TournamentEditView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +30,8 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('player_add/', PlayerAddView.as_view(), name='player_add'),
     path('tournament_add/', TournamentAddView.as_view(), name='tournament_add'),
+    path('tournament_edit/', TournamentEditView.as_view(), name='tournament_edit'),
+    path('tournament_delete/', TournamentDeleteView.as_view(), name='tournament_delete')
 
 
 
