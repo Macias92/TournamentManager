@@ -4,7 +4,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 from manager.forms import TournamentForm
-from manager.models import TournamentType, Player, Tournament
+from manager.models import TournamentType, Player, Tournament, Match, Team
 
 
 class IndexView(View):
@@ -61,5 +61,20 @@ class TournamentDeleteView(DeleteView):
     model = Tournament
     template_name = 'form.html'
     success_url = reverse_lazy('index')
+
+
+class MatchResultAddView(CreateView):
+    model = Match
+    fields = '__all__'
+    template_name = 'form.html'
+    success_url = reverse_lazy('index')
+    # TODO add special view where you can manage a tournament, like adding players, results, viewing fixtures ect.
+
+
+class TeamAddView(CreateView):
+    model = Team
+    fields = '__all__'
+    template_name = 'form.html'
+    success_url = reverse_lazy('index')  # the same as up^
 
 
